@@ -24,15 +24,26 @@
 | img      | String   | -         | true     | -
 | user     | ObjectId | Users     | true     | current_user
 
+### LOOK MODEL
 
+| KEY           | TYPE      | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
+| --------      | --------  | --------- | -------- | ---------------
+| name          | String    | -         | true     | -
+| cloth         | [ObjectId]| Cloth     | true     | -
+| category_look | String    |           | true     | -
+
+
+### CATEGORY MODEL
+| KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
+| --------  | --------   | --------- | -------- | ---------------
+| name      | String     |           | true     | -
+| cloth     | [ObjectId] | Cloth     | true     | -
 
 ### CLOSET MODEL
-| KEY       | TYPE     | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------  | -------- | --------- | -------- | ---------------
-| name      | String   |           | true     | -
-| user      | ObjectId | Users     | true     | current_user
-| cloth     | ObjectId | Cloth     | true     | current_user
-| categories| [String] |           | true     |
+| KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
+| --------  | --------   | --------- | -------- | ---------------
+| name      | String     |           | true     | -
+| categories| [ObjectId] | Category  | true     | -
 
 
 ## API ROUTES
@@ -46,29 +57,45 @@ POST http://DOMAIN/api/auth/signup
 ### AUTHENTICATION ENDPOINTS
 > TOKEN Required: NO
 
-| METHOD | URL           | What does it do      |
-| ------ | ------------- | -------------------- |
-| POST   | `auth/signup` | Create a new account |
-| POST   | `auth/login`  | Authenticates a user |
+| METHOD | URL           | What does it do       |
+| ------ | ------------- | --------------------  |
+| POST   | `/auth/signup` | Create a new account |
+| POST   | `/auth/login`  | Authenticates a user |
 
-### TODO ENDPOINTS
+### USER ENDPOINTS
 > TOKEN Required: YES
 
-| METHOD | URL                       | What does it do          |
-| ------ | ------------------------- | ------------------------ |
-| GET    | `me/todos`                | Get All My Todos         |
-| GET    | `me/todos/:id`            | Get One Todo             |
-| POST   | `me/todos`                | Create One Todo          |
-| PUT    | `me/todos/:id`            | Update Todo              |
-| DELETE | `me/todos/:id`            | Delete Todo              |
+| METHOD | URL              | What does it do          |
+| ------ | -----------------| ------------------------ |
+| GET    | `/me`            | Get User By Id           |
+| PUT    | `/me`            | Update User By Id        |
+| DELETE | `/me`            | Delete User  By Id       |
 
-### TODOs COMMENTS
+### CLOSET ENDPOINTS
 > TOKEN Required: YES
 
-| METHOD | URL                             | What does it do             |
-| ------ | ------------------------------- | --------------------------- |
-| GET    | `me/todos/:todoId/comments`     | Get All Comments in a Todo  |
-| POST   | `me/todos/:todoId/comments`     | Create a Comment in a Todo  |
-| PUT    | `me/todos/:todoId/comments/:id` | Update a Comment in a Todo  |
-| DELETE | `me/todos/:todoId/comments/:id` | Deletes a Comment in a Todo |
+| METHOD | URL                                                   | What does it do                            |
+| ------ | ----------------------------------------------------  | ------------------------------------------ |
+| GET    | `/me/closets`                                         | Get All closets                            |
+| GET    | `/me/closets/:closetId`                               | Get One closet                             |
+| POST   | `/me/closets`                                         | Create closet                              |
+| DELETE | `/me/closets/:closetId`                               | Delete closet                              |
+| GET    | `/me/closets/:closetId/categorys/`                    | Get All categorys in a closet              |
+| GET    | `/me/closets/:closetId/categorys/:categoryId/`        | Get One category in a closet               |
+| POST   | `/me/closets/:closetId/categorys/`                    | Create category in a closet                |
+| DELETE | `/me/closets/:closetId/categorys/:categoryId/`        | Delete category in a closet                |
+| GET    | `/me/closets/:closetId/categorys/:categoryId/clothes` | Get All clothes in a category in a closet  |
+| POST   | `/me/closets/:closetId/categorys/:categoryId/cloth`   | Create a cloth in a category in a closet   |
+| DELETE | `/me/closets/:closetId/categorys/:categoryId/cloth`   | Delete a cloth in a category in a closet   |
+
+### LOOK ENDPOINTS
+> TOKEN Required: YES
+
+| METHOD | URL                 | What does it do          |
+| ------ | -----------------   | ------------------------ |
+| GET    | `/me/looks`         | Get All Looks            |
+| GET    | `/me/looks/:lookId` | Get One Look             |
+| POST   | `/me/looks`         | Create Look              |
+| PUT    | `/me/looks/:lookId` | Update Look              |
+| DELETE | `/me/looks/:lookId` | Delete Look              |
 
