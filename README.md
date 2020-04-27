@@ -31,6 +31,7 @@
 | --------  | -------- | --------- | -------- | ---------------
 | name      | String   |           | true     | -
 | user      | ObjectId | Users     | true     | current_user
+| cloth     | ObjectId | Cloth     | true     | current_user
 | categories| [String] |           | true     |
 
 
