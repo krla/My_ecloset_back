@@ -15,9 +15,9 @@
 | gender          | String    |               | true     | enum: hombre, mujer |
 | password        | String    |               | true     | min(6)              |
 | img_url         | String    | -             | true     | -                   |
-| createdAt       | Date      |               |          | -                   |
+| createdAt       | Number    |               |          | -                   |
 | category_looks  | [ObjectId]| category_look |          | -                   |
-| closets         | [ObjectId]| Closets       |          | -                   |
+| closets         | [ObjectId]| closet        |          | -                   |
 
 ### CLOTH MODEL
 
@@ -30,26 +30,26 @@
 | KEY           | TYPE      | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
 | --------      | --------  | --------- | -------- | ---------------
 | name          | String    | -         | true     | -
-| cloth         | [ObjectId]| Cloth     | true     | -
-| date          | [Date]    |           |          | -
+| clothes       | [ObjectId]| cloth     | true     | -
+| dates         | [Date]    |           |          | -
 
 ### CATEGORY MODEL
 | KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
 | --------  | --------   | --------- | -------- | ---------------
 | name      | String     |           | true     | -
-| cloths    | [ObjectId] | Cloth     |          | -
+| clothes   | [ObjectId] | cloth     |          | -
 
 ### CATEGORY_LOOK MODEL
 | KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
 | --------  | --------   | --------- | -------- | ---------------
 | name      | String     |           | true     | -
-| looks     | [ObjectId] | Look      |          | -
+| looks     | [ObjectId] | look      |          | -
 
 ### CLOSET MODEL
 | KEY        | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
 | --------   | --------   | --------- | -------- | ---------------
 | name       | String     |           | true     | -
-| categories | [ObjectId] | Category  |          | -
+| categories | [ObjectId] | category  |          | -
 
 ## API ROUTES
 Please note that all routes in this API should be called with the `/api` prefix before the endpoint:
