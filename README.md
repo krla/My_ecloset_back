@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- Add a project description
+- My eCloset is an app that helps you to keep all your clothes in virtuals closets, where you can choose severals pieces of cloth and combine between them to keep your looks, and put them in a calendar. 
 
 ## MODELS
 
