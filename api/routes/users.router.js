@@ -6,8 +6,8 @@ const {
   updateUser
 } = require('../controllers/users.controller')
 
-router.get('/me', getUserById)
-router.delete('/me', deleteUserById)
-router.put('/me', updateUser)
+router.get('/', getUserById)
+router.put('/', updateUser)
+router.delete('/', deleteUserById)
 
 module.exports = router

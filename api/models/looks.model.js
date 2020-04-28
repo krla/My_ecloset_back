@@ -8,16 +8,16 @@ const lookSchema = new mongoose.Schema({
   clothes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "cloth",
-    },
+      ref: "cloth"
+    }
   ],
-  dates: [
+  user: [
     {
-      type: Date,
-      required: false,
-    },
-  ],
-});
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user"
+    }
+  ]
+})
 
 const lookModel = mongoose.model("look", lookSchema);
 module.exports = lookModel;

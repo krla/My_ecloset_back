@@ -1,53 +1,40 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required"],
+    required: [true, 'Name is required']
   },
   email: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, 'Email is required'],
     validate: {
-      validator(value) {
+      validator (value) {
         return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
           value
-        );
-      },
+        )
+      }
     },
-    unique: [true, "This is email is registered"],
+    unique: [true, 'This is email is registered']
   },
   password: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 6
   },
   gender: {
     type: String,
-    enum: ["hombre", "mujer"],
-    required: true,
+    enum: ['man', 'woman'],
+    required: true
   },
   img_url: {
-    type: String,
-    required: true,
+    type: String
   },
-  category_looks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "categoryLook",
-    },
-  ],
-  closets: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "closet",
-    },
-  ],
   createdAt: {
     type: Number,
-    default: Date.now(),
-  },
-});
+    default: Date.now()
+  }
+})
 
-const userModel = mongoose.model("user", userSchema);
-module.exports = userModel;
+const userModel = mongoose.model('user', userSchema)
+module.exports = userModel
