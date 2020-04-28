@@ -1,55 +1,42 @@
-# Project Name
+# My E-Closet
 
 ## Introduction
 
-- My eCloset is an app that helps you to keep all your clothes in virtuals closets, where you can choose severals pieces of cloth and combine between them to keep your looks, and put them in a calendar. 
+My eCloset is an app that helps you to keep all your clothes in virtuals closets, where you can choose severals pieces of cloth and combine between them to keep your looks, and put them in a calendar.
 
-## MODELS
+## DATA MODEL
+
+![](./docs/data_model.png)
 
 ### USER MODEL
 
-| KEY             | TYPE      |REFERENCE      | REQUIRED | VALIDATIONS         |
-| --------------- | ------    |-------------  | ---------|-------------        |
-| email           | String    |               | true     | regex(email)        |
-| name            | String    |               | true     |                     |
-| gender          | String    |               | true     | enum: hombre, mujer |
-| password        | String    |               | true     | min(6)              |
-| img_url         | String    | -             | true     | -                   |
-| createdAt       | Number    |               |          | -                   |
-| category_looks  | [ObjectId]| category_look |          | -                   |
-| closets         | [ObjectId]| closet        |          | -                   |
+KEY             | TYPE       | REFERENCE     | REQUIRED | VALIDATIONS
+--------------- | ------     |-------------  | ---------|-------------
+email           | String     |               | true     | regex(email)
+name            | String     |               | true     |
+gender          | String     |               | true     | enum: man, woman
+password        | String     |               | true     | min(6)
+img_url         | String     |               |          | -
+created_at      | Number     |               |          | -
 
 ### CLOTH MODEL
 
-| KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------  | --------   | --------- | -------- | ---------------
-| name      | String     | -         | true     | -
-| img_url   | String     | -         | true     | -
+KEY        | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
+---------- | --------   | --------- | -------- | ---------------
+user       | ObjectId   | user      | true     | -
+name       | String     | -         | true     | -
+img_url    | String     | -         | true     | -
+cloth_type | String     | -         | true     | enum: ..., others
+season     | String     | -         | default: all  | enum: winter, summer, all
 
-### LOOK MODEL
-| KEY           | TYPE      | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------      | --------  | --------- | -------- | ---------------
-| name          | String    | -         | true     | -
-| clothes       | [ObjectId]| cloth     | true     | -
-| dates         | [Date]    |           |          | -
+#### LOOK MODEL
 
-### CATEGORY MODEL
-| KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------  | --------   | --------- | -------- | ---------------
-| name      | String     |           | true     | -
-| clothes   | [ObjectId] | cloth     |          | -
+KEY           | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
+--------      | ---------- | --------- | -------- | ---------------
+name          | String     | -         | true     | -
+user          | ObjectId   | user      | true     | -
+clothes       | [ObjectId] | cloth     |          | -
 
-### CATEGORY_LOOK MODEL
-| KEY       | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------  | --------   | --------- | -------- | ---------------
-| name      | String     |           | true     | -
-| looks     | [ObjectId] | look      |          | -
-
-### CLOSET MODEL
-| KEY        | TYPE       | REFERENCE | REQUIRED | VALIDATIONS / DEFAULT
-| --------   | --------   | --------- | -------- | ---------------
-| name       | String     |           | true     | -
-| categories | [ObjectId] | category  |          | -
 
 ## API ROUTES
 Please note that all routes in this API should be called with the `/api` prefix before the endpoint:
@@ -61,52 +48,39 @@ POST http://DOMAIN/api/auth/signup
 ### AUTHENTICATION ENDPOINTS
 > TOKEN Required: NO
 
-| METHOD | URL            | What does it do      |
-| ------ | -------------- | -------------------- |
-| POST   | `/auth/signup` | Create a new account |
-| POST   | `/auth/login`  | Authenticates a user |
+METHOD | URL            | What does it do
+------ | -------------- | --------------------
+POST   | `/auth/signup` | Create a new account
+POST   | `/auth/login`  | Authenticates a user
 
 ### USER ENDPOINTS
 > TOKEN Required: YES
 
-| METHOD | URL              | What does it do          |
-| ------ | -----------------| ------------------------ |
-| GET    | `/me`            | Get User By Id           |
-| PUT    | `/me`            | Update User By Id        |
-| DELETE | `/me`            | Delete User  By Id       |
+METHOD | URL              | What does it do
+------ | -----------------| ------------------------
+GET    | `/me`            | Get Current User
+PUT    | `/me`            | Update Current User
+DELETE | `/me`            | Delete Current User
 
-### CLOSET ENDPOINTS
+### CLOTHS ENDPOINTS
 > TOKEN Required: YES
 
-| METHOD | URL                                                             | What does it do                            |
-| ------ | --------------------------------------------------------------- | ------------------------------------------ |
-| GET    | `/me/closets`                                                   | Get All closets                            |
-| GET    | `/me/closets/:closetId`                                         | Get One closet                             |
-| POST   | `/me/closets`                                                   | Create closet                              |
-| DELETE | `/me/closets/:closetId`                                         | Delete closet                              |
-| GET    | `/me/closets/:closetId/categories/`                             | Get All categories in a closet             |
-| POST   | `/me/closets/:closetId/categories/`                             | Create category in a closet                |
-| DELETE | `/me/closets/:closetId/categories/:categoryId/`                 | Delete category in a closet                |
-| GET    | `/me/closets/:closetId/categories/:categoryId/clothes`          | Get All clothes in a category in a closet  |
-| POST   | `/me/closets/:closetId/categories/:categoryId/clothes`          | Create a cloth in a category in a closet   |
-| DELETE | `/me/closets/:closetId/categories/:categoryId/clothes/:clothId` | Delete a cloth in a category in a closet   |
+METHOD | URL                   | What does it do
+------ | --------------------- | ------------------------------------------
+GET    | `/me/clothes`          | Get All My clothes
+POST   | `/me/clothes`          | Add A cloth
+GET    | `/me/clothes/:id`      | Get A cloth by Id
+DELETE | `/me/clothes/:id`      | Delete cloth
 
-### LOOK ENDPOINTS
+### LOOKS ENDPOINTS
 > TOKEN Required: YES
 
-| METHOD | URL                                                 | What does it do        |
-| ------ | --------------------------------------------------  | -----------------------|
-| GET    | `/me/category_looks`                                | Get All category_looks |
-| POST   | `/me/category_looks`                                | Create category_look   |
-| DELETE | `/me/category_looks`                                | Delete category_looks  |
-| GET    | `/me/category_looks/:categoryId/looks`              | Get All Looks          |
-| GET    | `/me/category_looks/:categoryId/looks/:lookId`      | Get a Look             |
-| POST   | `/me/category_looks/:categoryId/looks`              | Create Look            |
-| PUT    | `/me/category_looks/:categoryId/looks/:lookId`      | Update Look            |
-| DELETE | `/me/category_looks/:categoryId/looks/:lookId`      | Delete Look            |
-| GET    | `/me/dates`                                         | Get all dates          |
-| POST   | `/me/category_looks/:categoryId/looks/:lookId/date` | Add date               |
-| PUT    | `/me/category_looks/:categoryId/looks/:lookId/date` | Modify date            |
-| DELETE | `/me/category_looks/:categoryId/looks/:lookId/date` | Delete date            |
-
-
+METHOD | URL              | What does it do
+------ | ---------------  | -----------------------
+GET    | `/me/looks/`     | Get All My Looks
+POST   | `/me/looks/`     | Create A Looks
+GET    | `/me/looks/:id`  | Get a Look by Id
+PUT    | `/me/looks/:id`  | Update Look by Id
+DELETE | `/me/looks/:id`  | Delete Look by Id
+POST   | `/me/looks/:id/addCloth`     | Adds a Cloth to my look
+DELETE | `/me/looks/:id/removeCloth`  | Remove a Cloth to my look
