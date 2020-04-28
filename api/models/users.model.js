@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['man', 'woman'],
+    enum: ['Hombre', 'Mujer'],
     required: true
   },
   img_url: {
