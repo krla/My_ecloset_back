@@ -13,7 +13,8 @@ function signup (req, res) {
   const userBody = {
     name: req.body.user_name,
     email: req.body.user_email,
-    password: hashedPwd
+    password: hashedPwd,
+    gender: req.body.user_gender
   }
 
   UserModel.create(userBody)

@@ -5,7 +5,7 @@ const {
   addCloth,
   getClothById,
   deleteCloth
-} = require('../controllers/users.controller')
+} = require('../controllers/clothes.controller')
 
 router.get('/', getAllMyClothes)
 router.post('/', addCloth)
