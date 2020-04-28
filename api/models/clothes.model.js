@@ -15,15 +15,16 @@ const clothSchema = new mongoose.Schema({
   },
   cloth_type: {
     type: String,
-    enum: ['others'],
+    enum: ['blusas', 'camisetas', 'chaqueta', 'abrigo', 'rebecas', 'jersey', 'pullover', 'vaqueros', 'pantalon', 'falda', 'vestido', 'short', 'zapatos', 'camisa', 'polo', 'sombrero', 'otros'],
     required: true
   },
   season: {
     type: String,
-    enum: ['others'],
+    enum: ['primavera-verano', 'otoño-invierno', 'todas'],
+    default: 'todas',
     required: true
   }
-});
+})
 
 const clothModel = mongoose.model('cloth', clothSchema)
 module.exports = clothModel
