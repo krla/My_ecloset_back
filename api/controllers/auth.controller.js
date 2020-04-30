@@ -27,7 +27,7 @@ function signup (req, res) {
       const token = jwt.sign(
         userData,
         process.env.SECRET,
-        { expiresIn: '1w' }
+        { expiresIn: '30d' }
       )
 
       return res.json({ token: token, ...userData })
