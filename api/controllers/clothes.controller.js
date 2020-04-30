@@ -5,7 +5,8 @@ module.exports = {
   getAllMyClothes,
   addCloth,
   getClothById,
-  deleteCloth
+  deleteCloth,
+  filterByClothType
 }
 
 function getAllMyClothes (req, res) {
@@ -36,4 +37,21 @@ function deleteCloth (req, res) {
     .findByIdAndDelete({ _id: req.params.id })
     .then((response) => res.json(response))
     .catch((err) => handleError(err, res))
+}
+
+function filterByClothType (req, res) {
+  var clothFilter = {}
+  if (req.query.cloth_type) {
+    clothFilter = {
+      cloth_type: {
+        $regex: `${req.query.cloth_type}`,
+        $options: 'i'
+      }
+    }
+  }
+  ClothesModel.find(clothFilter)
+    .then((clothes) => {
+      res.json(clothes)
+    })
+    .catch((err) => handleError(err))
 }
