@@ -54,7 +54,6 @@ function deleteLookById (req, res) {
 
 function addsClothToMyLook (req, res) {
   const clothId = req.body.cloth
-  console.log(clothId)
   LooksModel
     .findById(req.params.id)
     .then(look => {
