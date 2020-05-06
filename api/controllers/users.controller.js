@@ -21,7 +21,7 @@ function getUserById (req, res) {
 function deleteUserById (req, res) {
   const userId = res.locals.user._id
   UserModel
-    .remove(userId)
+    .findByIdAndDelete(userId)
     .then(response => res.json(response))
     .catch(err => handleError(err, res))
 }
