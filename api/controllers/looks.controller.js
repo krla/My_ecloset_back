@@ -6,9 +6,7 @@ module.exports = {
   createLook,
   getLookById,
   updateLookById,
-  deleteLookById,
-  addsClothToMyLook,
-  removeClothToMyLook
+  deleteLookById
 }
 
 function getAllMyLooks (req, res) {
@@ -50,28 +48,4 @@ function deleteLookById (req, res) {
     .findByIdAndDelete({ _id: req.params.id })
     .then(response => res.json(response))
     .catch(err => handleError(err, res))
-}
-
-function addsClothToMyLook (req, res) {
-  const clothId = req.body.cloth
-  LooksModel
-    .findById(req.params.id)
-    .then(look => {
-      look.clothes.push(clothId)
-      look.save()
-      res.json(look)
-    })
-    .catch(err => console.log(err))
-}
-
-function removeClothToMyLook (req, res) {
-  const clothId = req.body.cloth
-  LooksModel
-    .findById(req.params.id)
-    .then(look => {
-      look.clothes.pull(clothId)
-      look.save()
-      res.json(look)
-    })
-    .catch(err => console.log(err))
 }

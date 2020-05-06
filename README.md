@@ -60,6 +60,7 @@ METHOD | URL              | What does it do
 ------ | -----------------| ------------------------
 GET    | `/me`            | Get Current User
 PUT    | `/me`            | Update Current User
+PUT    | `/me/password`   | Update Password User
 DELETE | `/me`            | Delete Current User
 
 ### CLOTHS ENDPOINTS
@@ -69,7 +70,6 @@ METHOD | URL                   | What does it do
 ------ | --------------------- | ------------------------------------------
 GET    | `/me/clothes`          | Get All My clothes
 POST   | `/me/clothes`          | Add A cloth
-GET    | `/me/clothes/:id`      | Get A cloth by Id
 DELETE | `/me/clothes/:id`      | Delete cloth
 
 ### LOOKS ENDPOINTS
@@ -82,5 +82,3 @@ POST   | `/me/looks/`     | Create A Looks
 GET    | `/me/looks/:id`  | Get a Look by Id
 PUT    | `/me/looks/:id`  | Update Look by Id
 DELETE | `/me/looks/:id`  | Delete Look by Id
-POST   | `/me/looks/:id/addCloth`     | Adds a Cloth to my look
-DELETE | `/me/looks/:id/removeCloth`  | Remove a Cloth to my look

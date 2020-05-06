@@ -4,7 +4,6 @@ const { handleError } = require('../utils')
 module.exports = {
   getAllMyClothes,
   addCloth,
-  getClothById,
   deleteCloth
 }
 
@@ -23,13 +22,6 @@ function addCloth (req, res) {
     .create(clothBody)
     .then((response) => res.json(response))
     .catch((err) => handleError(err))
-}
-
-function getClothById (req, res) {
-  ClothesModel
-    .findById(req.params.id)
-    .then((response) => res.json(response))
-    .catch((err) => handleError(err, res))
 }
 
 function deleteCloth (req, res) {
